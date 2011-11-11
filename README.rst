@@ -44,17 +44,13 @@ renders to
       <style>
         #header h1 {
           font-size: 26px;
-          font-weight: bold;
-        }
+          font-weight: bold; }
         #header p {
-          font-size: 12px;
-        }
-        #header p a {
-          text-decoration: none;
-        }
-        #header p a:hover {
-          border-width: 1px;
-        }
+          font-size: 12px; }
+          #header p a {
+            text-decoration: none; }
+            #header p a:hover {
+              border-width: 1px; }
       </style>
 
 
@@ -81,6 +77,9 @@ Note that all relative URLs in your stylesheet are converted to absolute URLs us
 
 Settings
 ********
+
+``LESS_EXECUTABLE``
+    Path to SASS compiler executable. Default: "sass".
 
 ``SCSS_OUTPUT_DIR``
     Output directory for compiled external stylesheets. It's relative to ``STATIC_ROOT``. Default: ``"SCSS_CACHE"``.
