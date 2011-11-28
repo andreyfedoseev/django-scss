@@ -9,3 +9,20 @@ INSTALLED_APPS = (
 )
 SCSS_MTIME_DELAY = 2
 SCSS_OUTPUT_DIR = "SCSS_CACHE"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django_scss': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    }
+}

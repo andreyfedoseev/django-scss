@@ -5,12 +5,14 @@ from ..utils import URLConverter
 from django.conf import settings
 from django.core.cache import cache
 from django.template.base import Library, Node
+import logging
 import shlex
 import subprocess
 import os
 import sys
 
 
+logger = logging.getLogger("django_scss")
 register = Library()
 
 
@@ -104,5 +106,8 @@ def scss(path):
             for filename in os.listdir(output_directory):
                 if filename.startswith(base_filename) and filename != compiled_filename:
                     os.remove(os.path.join(output_directory, filename))
+        elif errors:
+            logger.error(errors)
+            return path
 
-    return output_path[len(STATIC_ROOT):].lstrip("/")
+    return output_path[len(STATIC_ROOT):].replace(os.sep, "/").lstrip("/")
