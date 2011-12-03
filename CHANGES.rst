@@ -4,7 +4,7 @@ Changes
 0.2
 ---
 
-- Log coffeescript compilation errors
+- Log SCSS compilation errors
 - Fixed bug with paths on Windows
 
 
