@@ -78,7 +78,7 @@ Note that all relative URLs in your stylesheet are converted to absolute URLs us
 Settings
 ********
 
-``LESS_EXECUTABLE``
+``SCSS_EXECUTABLE``
     Path to SASS compiler executable. Default: "sass".
 
 ``SCSS_OUTPUT_DIR``
