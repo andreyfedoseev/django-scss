@@ -85,13 +85,14 @@ def scss(path):
 
     else:
         output_path = os.path.join(output_directory, "%s-%s.css" % (base_filename, hashed_mtime))
-        if not compile_scss(encoded_full_path, output_path, path):
-            return path
+        if not os.path.exists(output_path):
+            if not compile_scss(encoded_full_path, output_path, path):
+                return path
 
-        # Remove old files
-        compiled_filename = os.path.split(output_path)[-1]
-        for filename in os.listdir(output_directory):
-            if filename.startswith(base_filename) and filename != compiled_filename:
-                os.remove(os.path.join(output_directory, filename))
+            # Remove old files
+            compiled_filename = os.path.split(output_path)[-1]
+            for filename in os.listdir(output_directory):
+                if filename.startswith(base_filename) and filename != compiled_filename:
+                    os.remove(os.path.join(output_directory, filename))
 
     return output_path[len(STATIC_ROOT):].replace(os.sep, "/").lstrip("/")
