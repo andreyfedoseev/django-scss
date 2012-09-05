@@ -1,4 +1,4 @@
-from django_scss.settings import SCSS_EXECUTABLE
+from django_scss.settings import SCSS_EXECUTABLE, SCSS_USE_COMPASS
 from django.conf import settings
 import logging
 import os
@@ -12,6 +12,10 @@ logger = logging.getLogger("django_scss")
 
 
 URL_PATTERN = re.compile(r'url\(([^\)]+)\)')
+
+ARGS = ""
+if SCSS_USE_COMPASS:
+    ARGS += " --compass"
 
 
 class URLConverter(object):
@@ -33,9 +37,15 @@ class URLConverter(object):
 
 
 def compile_scss(input, output, scss_path):
-    command = "%s -C %s" % (SCSS_EXECUTABLE, input)
+    command = "%s %s -C %s" % (SCSS_EXECUTABLE, ARGS, input)
+
+    sass_dir = settings.STATIC_ROOT
+
+    if not os.path.exists(sass_dir):
+        os.makedirs(sass_dir)
+
     args = shlex.split(command)
-    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=sass_dir)
     out, errors = p.communicate()
 
     if errors:
