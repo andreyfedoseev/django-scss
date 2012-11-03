@@ -92,3 +92,6 @@ Settings
 
 ``SCSS_MTIME_DELAY``
     Cache timeout for reading the modification time of external stylesheets (in seconds). Default: 10 seconds.
+
+``SCSS_USE_COMPASS``
+    Boolean. Wheter to use compass or not. Compass must be installed in your system. Run "sass --compass" and if no error is shown it means that compass is installed.
