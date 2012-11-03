@@ -2,8 +2,17 @@ from django.conf.global_settings import *
 import os
 
 
-STATIC_ROOT = MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
-STATIC_URL = MEDIA_URL = "/media/"
+DEBUG = True
+
+STATIC_ROOT = MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'static')
+STATIC_URL = MEDIA_URL = "/static/"
+
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'staticfiles_dir'),
+    ("prefix", os.path.join(os.path.dirname(__file__), 'staticfiles_dir_with_prefix')),
+)
+
+
 INSTALLED_APPS = (
     "django_scss",
 )

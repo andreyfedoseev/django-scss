@@ -1,17 +1,11 @@
 from django_scss.utils import compile_scss, logger
 from django_scss.settings import SCSS_DEVMODE_WATCH_DIRS, SCSS_OUTPUT_DIR, SCSS_DEVMODE_EXCLUDE
-from django.conf import settings
+from .utils import STATIC_ROOT
 import os
 import re
 import sys
 import time
 import threading
-
-
-try:
-    STATIC_ROOT = settings.STATIC_ROOT
-except AttributeError:
-    STATIC_ROOT = settings.MEDIA_ROOT
 
 
 WATCHED_FILES = {}
