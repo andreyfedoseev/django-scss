@@ -44,7 +44,7 @@ def compile_scss(input, output, scss_path):
     if SCSS_USE_COMPASS:
         args.insert(1, "--compass")
 
-    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=scss_root)
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=STATIC_ROOT)
     out, errors = p.communicate()
 
     if errors:
