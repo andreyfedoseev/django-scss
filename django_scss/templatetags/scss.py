@@ -4,7 +4,8 @@ from ..settings import SCSS_EXECUTABLE, SCSS_USE_CACHE,\
 from ..utils import compile_scss, STATIC_ROOT
 from django.conf import settings
 from django.core.cache import cache
-from django.template.base import Library, Node
+from django.contrib.staticfiles import finders
+from django.template.base import Library, Node, TemplateSyntaxError
 import logging
 import shlex
 import subprocess
@@ -62,28 +63,18 @@ def do_inlinescss(parser, token):
 
 def scss_paths(path):
 
-    # while developing it is more confortable
-    # searching for the scss files rather then
-    # doing collectstatics all the time
-    if settings.DEBUG:
-        for sfdir in settings.STATICFILES_DIRS:
-            prefix = None
-            if isinstance(sfdir, (tuple, list)):
-                prefix, sfdir = sfdir
-            if prefix:
-                if not path.startswith(prefix):
-                    continue
-                input_file = os.path.join(sfdir, path[len(prefix):].lstrip(os.sep))
-            else:
-                input_file = os.path.join(sfdir, path)
-            if os.path.exists(input_file):
-                output_dir = os.path.join(STATIC_ROOT, SCSS_OUTPUT_DIR, os.path.dirname(path))
-                file_name = os.path.basename(path)
-                return input_file, file_name, output_dir
-
     full_path = os.path.join(STATIC_ROOT, path)
-    file_name = os.path.split(path)[-1]
 
+    if settings.DEBUG and not os.path.exists(full_path):
+        # while developing it is more confortable
+        # searching for the scss files rather then
+        # doing collectstatics all the time
+        full_path = finders.find(path)
+
+        if full_path is None:
+            raise TemplateSyntaxError("Can't find staticfile named: {}".format(path))
+
+    file_name = os.path.split(path)[-1]
     output_dir = os.path.join(STATIC_ROOT, SCSS_OUTPUT_DIR, os.path.dirname(path))
 
     return full_path, file_name, output_dir
