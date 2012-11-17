@@ -1,6 +1,11 @@
 Changes
 *******
 
+0.4
+----
+ - Switch to staticfiles.finders when looking up the files in DEBUG mode.
+ - Fix the CWD when running scss compiler
+
 0.3
 ----
 
