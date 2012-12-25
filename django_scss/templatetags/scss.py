@@ -33,9 +33,9 @@ class InlineSCSSNode(Node):
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, errors = p.communicate(source)
         if out:
-            return out.decode("utf-8")
+            return out.decode(settings.FILE_CHARSET)
         elif errors:
-            return errors.decode("utf-8")
+            return errors.decode(settings.FILE_CHARSET)
 
         return u""
 

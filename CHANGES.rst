@@ -1,6 +1,11 @@
 Changes
 *******
 
+Dev
+-----
+
+- Fix unicodedecodeerror with non ascii in scss file
+
 0.4
 ----
  - Switch to staticfiles.finders when looking up the files in DEBUG mode.

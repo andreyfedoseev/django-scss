@@ -54,8 +54,12 @@ def compile_scss(input, output, scss_path):
     output_directory = os.path.dirname(output)
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
+    compiled_css = URLConverter(
+        out.decode(settings.FILE_CHARSET),
+        os.path.join(STATIC_URL, scss_path)
+    ).convert()
     compiled_file = open(output, "w+")
-    compiled_file.write(URLConverter(out, os.path.join(STATIC_URL, scss_path)).convert())
+    compiled_file.write(compiled_css.encode(settings.FILE_CHARSET))
     compiled_file.close()
 
     return True

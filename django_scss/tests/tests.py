@@ -1,3 +1,4 @@
+# coding: utf-8
 from unittest import main, TestCase
 from django.http import HttpRequest
 from django.template.base import Template
@@ -109,6 +110,21 @@ class SCSSTestCase(TestCase):
         compiled = """#header-from-staticfiles-dir-with-prefix h1 {
   color: red; }"""
         self.assertEquals(compiled_content, compiled)
+
+    def test_non_ascii_content(self):
+
+        template = Template("""
+        {% load scss %}
+        {% scss "styles/non-ascii.scss" %}
+        """)
+        compiled_filename = template.render(self._get_request_context()).strip()
+        compiled_path = os.path.join(self.django_settings.STATIC_ROOT, compiled_filename)
+        compiled_content = open(compiled_path).read().strip()
+        compiled = """.external_link:first-child:before {
+  content: "Zobacz także:";
+  background: url('/static/styles/картинка.png'); }"""
+        self.assertEquals(compiled_content, compiled)
+
 
 if __name__ == '__main__':
     main()
