@@ -1,7 +1,7 @@
 Changes
 *******
 
-Dev
+0.4.1
 -----
 
 - Fix unicodedecodeerror with non ascii in scss file

@@ -13,7 +13,7 @@ CHANGES = read('CHANGES.rst')
 setup(
     name = "django-scss",
     packages = find_packages(),
-    version = "0.4",
+    version = "0.4.1",
     author = "Andrey Fedoseev",
     author_email = "andrey.fedoseev@gmail.com",
     url = "https://github.com/andreyfedoseev/django-scss",
