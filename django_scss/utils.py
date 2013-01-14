@@ -1,4 +1,5 @@
-from django_scss.settings import SCSS_EXECUTABLE, SCSS_USE_COMPASS, SCSS_OUTPUT_DIR
+from django_scss.settings import SCSS_EXECUTABLE, SCSS_USE_COMPASS, SCSS_ROOT,\
+    SCSS_OUTPUT_DIR
 from django.conf import settings
 import logging
 import os
@@ -10,7 +11,7 @@ import subprocess
 logger = logging.getLogger("django_scss")
 
 
-STATIC_ROOT = getattr(settings, "STATIC_ROOT", getattr(settings, "STATIC_ROOT"))
+STATIC_ROOT = getattr(settings, "STATIC_ROOT", getattr(settings, "MEDIA_ROOT"))
 STATIC_URL = getattr(settings, "STATIC_URL", getattr(settings, "MEDIA_URL"))
 
 
@@ -36,7 +37,7 @@ class URLConverter(object):
 
 def compile_scss(input, output, scss_path):
 
-    scss_root = os.path.join(STATIC_ROOT, SCSS_OUTPUT_DIR)
+    scss_root = os.path.join(SCSS_ROOT, SCSS_OUTPUT_DIR)
     if not os.path.exists(scss_root):
         os.makedirs(scss_root)
 

@@ -70,7 +70,7 @@ renders to
     <link rel="stylesheet" href="/media/SCSS_CACHE/path/to/styles-91ce1f66f583.css" />
 
 Note that by default compiled files are saved into ``SCSS_CACHE`` folder under your ``STATIC_ROOT`` (or ``MEDIA_ROOT`` if you have no ``STATIC_ROOT`` in your settings).
-You can change this folder name with ``SCSS_OUTPUT_DIR`` setting.
+You can change this folder with ``SCSS_ROOT`` and ``SCSS_OUTPUT_DIR`` settings.
 
 Note that all relative URLs in your stylesheet are converted to absolute URLs using your ``STATIC_URL`` setting.
 
@@ -81,8 +81,11 @@ Settings
 ``SCSS_EXECUTABLE``
     Path to SASS compiler executable. Default: "sass".
 
+``SCSS_ROOT``
+    Controls the absolute file path that and compiled files will be written to. Default: ``STATIC_ROOT``.
+
 ``SCSS_OUTPUT_DIR``
-    Output directory for compiled external stylesheets. It's relative to ``STATIC_ROOT``. Default: ``"SCSS_CACHE"``.
+    Controls the directory inside ``SCSS_ROOT`` that compiled files will be written to. Default: ``"SCSS_CACHE"``.
 
 ``SCSS_USE_CACHE``
     Whether to use cache for inline styles. Default: ``True``.

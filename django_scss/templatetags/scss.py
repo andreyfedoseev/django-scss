@@ -1,6 +1,7 @@
 from ..cache import get_cache_key, get_hexdigest, get_hashed_mtime
 from ..settings import SCSS_EXECUTABLE, SCSS_USE_CACHE,\
-    SCSS_CACHE_TIMEOUT, SCSS_OUTPUT_DIR, SCSS_DEVMODE, SCSS_DEVMODE_WATCH_DIRS
+    SCSS_CACHE_TIMEOUT, SCSS_ROOT, SCSS_OUTPUT_DIR, SCSS_DEVMODE,\
+    SCSS_DEVMODE_WATCH_DIRS
 from ..utils import compile_scss, STATIC_ROOT
 from django.conf import settings
 from django.core.cache import cache
@@ -75,7 +76,7 @@ def scss_paths(path):
             raise TemplateSyntaxError("Can't find staticfile named: {}".format(path))
 
     file_name = os.path.split(path)[-1]
-    output_dir = os.path.join(STATIC_ROOT, SCSS_OUTPUT_DIR, os.path.dirname(path))
+    output_dir = os.path.join(SCSS_ROOT, SCSS_OUTPUT_DIR, os.path.dirname(path))
 
     return full_path, file_name, output_dir
 
