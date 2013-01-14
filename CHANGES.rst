@@ -1,7 +1,7 @@
 Changes
 *******
 
-Dev
+0.5
 ----
 
 - Add SCSS_ROOT setting
