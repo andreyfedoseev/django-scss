@@ -10,6 +10,17 @@ Installation
 1. Add "django_scss" to INSTALLED_APPS setting.
 2. Make sure that you have sass executable installed. See SASS official site for details.
 3. Optionally, you can specify the full path to sass executable with SCSS_EXECUTABLE setting. By default it's set to sass.
+4. In case you use Django’s staticfiles contrib app you have to add django-scss’s file finder to the ``STATICFILES_FINDERS`` setting, for example :
+
+::
+
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        # other finders..
+        'django_scss.finders.SCSSFinder',
+    )
+
 
 Example Usage
 *************
@@ -82,7 +93,7 @@ Settings
     Path to SASS compiler executable. Default: "sass".
 
 ``SCSS_ROOT``
-    Controls the absolute file path that and compiled files will be written to. Default: ``STATIC_ROOT``.
+    Controls the absolute file path that compiled files will be written to. Default: ``STATIC_ROOT``.
 
 ``SCSS_OUTPUT_DIR``
     Controls the directory inside ``SCSS_ROOT`` that compiled files will be written to. Default: ``"SCSS_CACHE"``.
