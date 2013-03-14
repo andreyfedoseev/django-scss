@@ -12,6 +12,7 @@ STATICFILES_DIRS = (
     ("prefix", os.path.join(os.path.dirname(__file__), 'staticfiles_dir_with_prefix')),
 )
 
+SECRET_KEY = "SECRET_KEY"
 
 INSTALLED_APPS = (
     "django_scss",
